@@ -19,10 +19,6 @@ az group create \
   --subscription $SUBSCRIPTION_ID
 
 # 2. Apply Read-Only Lock to Resource Group
-az lock create \
-  --name siva-lock \
-  --resource-group $RG_NAME \
-  --lock-type ReadOnly
 
 # 3. Create Virtual Network (VNet)
 az network vnet create \
@@ -62,7 +58,7 @@ az network nsg rule create \
 az vm create \
   --resource-group $RG_NAME \
   --name $VM_NAME \
-  --image Canonical:0001-com-ubuntu-server-noble:24_04-lts:latest \
+  --image Ubuntu Server 24.04 LTS - x64 Gen2 \
   --admin-username $ADMIN_USERNAME \
   --admin-password $ADMIN_PASSWORD \
   --size Standard_B1s \
