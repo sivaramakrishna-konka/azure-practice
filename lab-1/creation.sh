@@ -58,7 +58,7 @@ az network nsg rule create \
 az vm create \
   --resource-group $RG_NAME \
   --name $VM_NAME \
-  --image Canonical:0001-com-ubuntu-server-noble:24_04-lts-gen2:latest \
+  --image Canonical:ubuntu-24_04-lts:server:latest \
   --admin-username $ADMIN_USERNAME \
   --admin-password $ADMIN_PASSWORD \
   --size Standard_B1s \
