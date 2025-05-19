@@ -28,7 +28,7 @@ az network vnet create \
   --resource-group $RG_NAME \
   --name darsi \
   --address-prefix 172.16.0.0/16 \
-  --location westtus
+  --location westus
 
 # Subnets
 az network vnet subnet create \
