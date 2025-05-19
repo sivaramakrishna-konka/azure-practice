@@ -24,62 +24,51 @@ az lock create \
   --resource-group $RG_NAME \
   --lock-type ReadOnly
 
-# # 3. Create Virtual Network (VNet)
-# az network vnet create \
-#   --resource-group $RG_NAME \
-#   --name $VNET_NAME \
-#   --address-prefix $VNET_CIDR \
-#   --location $LOCATION
+# 3. Create Virtual Network (VNet)
+az network vnet create \
+  --resource-group $RG_NAME \
+  --name $VNET_NAME \
+  --address-prefix $VNET_CIDR \
+  --location $LOCATION
 
-# # 4. Create Subnet
-# az network vnet subnet create \
-#   --resource-group $RG_NAME \
-#   --vnet-name $VNET_NAME \
-#   --name $SUBNET_NAME \
-#   --address-prefix $SUBNET_CIDR
+# 4. Create Subnet
+az network vnet subnet create \
+  --resource-group $RG_NAME \
+  --vnet-name $VNET_NAME \
+  --name $SUBNET_NAME \
+  --address-prefix $SUBNET_CIDR
 
-# # 5. Create Network Security Group (NSG)
-# az network nsg create \
-#   --resource-group $RG_NAME \
-#   --name $NSG_NAME \
-#   --location $LOCATION
+# 5. Create Network Security Group (NSG)
+az network nsg create \
+  --resource-group $RG_NAME \
+  --name $NSG_NAME \
+  --location $LOCATION
 
-# # 6. Create NSG Rules (Allow SSH on port 22 and HTTP on port 80 from anywhere)
-# az network nsg rule create \
-#   --resource-group $RG_NAME \
-#   --nsg-name $NSG_NAME \
-#   --name AllowSSH \
-#   --priority 100 \
-#   --protocol Tcp \
-#   --destination-port-ranges 22 \
-#   --access Allow \
-#   --source-address-prefixes '*' \
-#   --destination-address-prefixes '*' \
-#   --direction Inbound
+# 6. Create NSG Rules (Allow SSH on port 22 and HTTP on port 80 from anywhere)
+az network nsg rule create \
+  --resource-group $RG_NAME \
+  --nsg-name $NSG_NAME \
+  --name AllowSSH \
+  --priority 100 \
+  --protocol Tcp \
+  --destination-port-ranges 22 80 \
+  --access Allow \
+  --source-address-prefixes '*' \
+  --destination-address-prefixes '*' \
+  --direction Inbound
 
-# az network nsg rule create \
-#   --resource-group $RG_NAME \
-#   --nsg-name $NSG_NAME \
-#   --name AllowHTTP \
-#   --priority 110 \
-#   --protocol Tcp \
-#   --destination-port-ranges 80 \
-#   --access Allow \
-#   --source-address-prefixes '*' \
-#   --destination-address-prefixes '*' \
-#   --direction Inbound
 
-# # 7. Create Virtual Machine (Ubuntu 24.04 LTS)
-# az vm create \
-#   --resource-group $RG_NAME \
-#   --name $VM_NAME \
-#   --image Canonical:0001-com-ubuntu-server-noble:24_04-lts:latest \
-#   --admin-username $ADMIN_USERNAME \
-#   --admin-password $ADMIN_PASSWORD \
-#   --size Standard_D2s_v3 \
-#   --location $LOCATION \
-#   --vnet-name $VNET_NAME \
-#   --subnet $SUBNET_NAME \
-#   --nsg $NSG_NAME \
-#   --public-ip-sku Standard \
-#   --no-wait
+# 7. Create Virtual Machine (Ubuntu 24.04 LTS)
+az vm create \
+  --resource-group $RG_NAME \
+  --name $VM_NAME \
+  --image Canonical:0001-com-ubuntu-server-noble:24_04-lts:latest \
+  --admin-username $ADMIN_USERNAME \
+  --admin-password $ADMIN_PASSWORD \
+  --size Standard_B1s \
+  --location $LOCATION \
+  --vnet-name $VNET_NAME \
+  --subnet $SUBNET_NAME \
+  --nsg $NSG_NAME \
+  --public-ip-sku Standard \
+  --no-wait
