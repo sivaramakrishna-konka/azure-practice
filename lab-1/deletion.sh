@@ -1,2 +1,2 @@
 #!/bin/bash
-az group delete --name siva --yes --no-wait
+az group delete --name siva --yes

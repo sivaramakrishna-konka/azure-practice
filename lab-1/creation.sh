@@ -66,5 +66,4 @@ az vm create \
   --vnet-name $VNET_NAME \
   --subnet $SUBNET_NAME \
   --nsg $NSG_NAME \
-  --public-ip-sku Standard \
-  --no-wait
+  --public-ip-sku Standard
